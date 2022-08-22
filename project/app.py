@@ -4,30 +4,31 @@ import os , io , sys
 import numpy as np 
 import cv2
 import base64
-from yolo_detection_images import runModel
+from yolo_detection_images import initModel, runModel
 
 app = Flask(__name__)
+# Load the pretrained model
+nets, Labels, Colors = initModel() 
 
 ############################################## THE REAL DEAL ###############################################
 @app.route('/detectObject' , methods=['POST'])
 def mask_image():
 	# print(request.files , file=sys.stderr)
-	file = request.files['image'].read() ## byte file
-	npimg = np.fromstring(file, np.uint8)
-	img = cv2.imdecode(npimg,cv2.IMREAD_COLOR)
+    file = request.files['image'].read() ## byte file
+    npimg = np.frombuffer(bytearray(file), np.uint8)
+    img = cv2.imdecode(npimg,cv2.IMREAD_COLOR)
 	######### Do preprocessing here ################
 	# img[img > 150] = 0
 	## any random stuff do here
-	################################################
+	################################################    
+    img = runModel(img, nets, Labels, Colors)
 
-	img = runModel(img)
-
-	img = Image.fromarray(img.astype("uint8"))
-	rawBytes = io.BytesIO()
-	img.save(rawBytes, "JPEG")
-	rawBytes.seek(0)
-	img_base64 = base64.b64encode(rawBytes.read())
-	return jsonify({'status':str(img_base64)})
+    img = Image.fromarray(img.astype("uint8"))
+    rawBytes = io.BytesIO()
+    img.save(rawBytes, "JPEG")
+    rawBytes.seek(0)
+    img_base64 = base64.b64encode(rawBytes.read())
+    return jsonify({'status':str(img_base64)})
 
 ##################################################### THE REAL DEAL HAPPENS ABOVE ######################################
 

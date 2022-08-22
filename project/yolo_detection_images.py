@@ -34,6 +34,7 @@ def load_model(configpath,weightspath):
     # load our YOLO object detector trained on COCO dataset (80 classes)
     print("[INFO] loading YOLO from disk...")
     net = cv2.dnn.readNetFromDarknet(configpath, weightspath)
+    print("[INFO] loading YOLO successfully...")
     return net
 
 
@@ -52,7 +53,7 @@ def get_predection(image,net,LABELS,COLORS):
     net.setInput(blob)
     start = time.time()
     layerOutputs = net.forward(ln)
-    print(layerOutputs)
+    # print(layerOutputs)
     end = time.time()
 
     # show timing information on YOLO
@@ -114,21 +115,25 @@ def get_predection(image,net,LABELS,COLORS):
             color = [int(c) for c in COLORS[classIDs[i]]]
             cv2.rectangle(image, (x, y), (x + w, y + h), color, 2)
             text = "{}: {:.4f}".format(LABELS[classIDs[i]], confidences[i])
-            print(boxes)
-            print(classIDs)
+            # print(boxes)
+            # print(classIDs)
             cv2.putText(image, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX,0.5, color, 2)
     return image
 
-def runModel(image):
-    # load our input image and grab its spatial dimensions
-    # image = cv2.imread(img)
+def initModel():
     labelsPath="coco.names"
     cfgpath="cfg/yolov3.cfg"
     wpath="yolov3.weights"
-    Lables=get_labels(labelsPath)
+    Labels=get_labels(labelsPath)
     CFG=get_config(cfgpath)
     Weights=get_weights(wpath)
     nets=load_model(CFG,Weights)
-    Colors=get_colors(Lables)
-    res=get_predection(image,nets,Lables,Colors)
+    Colors=get_colors(Labels)
+
+    return nets, Labels, Colors
+
+def runModel(image, nets, Labels, Colors):
+    # load our input image and grab its spatial dimensions
+    # image = cv2.imread(img)
+    res=get_predection(image,nets,Labels,Colors)
     return res
