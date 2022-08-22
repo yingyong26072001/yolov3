@@ -15,14 +15,15 @@ nets, Labels, Colors = initModel()
 def mask_image():
 	# print(request.files , file=sys.stderr)
     file = request.files['image'].read() ## byte file
-    npimg = np.frombuffer(bytearray(file), np.uint8)
-    img = cv2.imdecode(npimg,cv2.IMREAD_COLOR)
+    npimg = np.asarray(bytearray(file), dtype="uint8")
+    img = cv2.imdecode(npimg, cv2.IMREAD_COLOR)
 	######### Do preprocessing here ################
 	# img[img > 150] = 0
 	## any random stuff do here
 	################################################    
+    # img = runModel(img, nets, Labels, Colors)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     img = runModel(img, nets, Labels, Colors)
-
     img = Image.fromarray(img.astype("uint8"))
     rawBytes = io.BytesIO()
     img.save(rawBytes, "JPEG")
