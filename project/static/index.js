@@ -1,6 +1,6 @@
 window.onload = () => {
 	$('#sendbutton').click(() => {
-		imagebox = $('#imagebox')
+		imagebox = $('#imagebox1')
 		input = $('#imageinput')[0]
 		if(input.files && input.files[0])
 		{
@@ -21,7 +21,9 @@ window.onload = () => {
 					console.log(data);
 					bytestring = data['status']
 					image = bytestring.split('\'')[1]
-					imagebox.attr('src' , 'data:image/jpeg;base64,'+image)
+					imagebox.attr('src' , 'data:image/jpeg;base64,'+image);
+					imagebox.height(400);
+					imagebox.width(600);
 				}
 			});
 		}
@@ -31,6 +33,8 @@ window.onload = () => {
 
 
 function readUrl(input){
+	$('#imagebox1').height(0)
+	$('#imagebox1').width(0)
 	imagebox = $('#imagebox')
 	console.log("evoked readUrl")
 	if(input.files && input.files[0]){
@@ -39,8 +43,8 @@ function readUrl(input){
 			// console.log(e)
 			
 			imagebox.attr('src',e.target.result); 
-			imagebox.height(500);
-			imagebox.width(800);
+			imagebox.height(400);
+			imagebox.width(600);
 		}
 		reader.readAsDataURL(input.files[0]);
 	}

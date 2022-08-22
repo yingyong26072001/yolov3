@@ -124,6 +124,7 @@ def initModel():
     labelsPath="coco.names"
     cfgpath="cfg/yolov3.cfg"
     wpath="yolov3.weights"
+    # wpath="yolov5s.pt"
     Labels=get_labels(labelsPath)
     CFG=get_config(cfgpath)
     Weights=get_weights(wpath)
