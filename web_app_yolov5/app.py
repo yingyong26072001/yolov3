@@ -9,6 +9,8 @@ import shutil
 
 app = Flask(__name__)
 
+path_clone_git = 'D:/yolov3/web_app_yolov5/'
+
 @app.route('/detectObject' , methods=['POST'])
 def mask_image():
 
@@ -18,12 +20,13 @@ def mask_image():
     results = model(img, size=640)
     results.render()
 
-    path = "D:/yolov5/web_app/runs/detect/"
+    path = path_clone_git + "runs/detect/"
     shutil.rmtree(path)
 
     results.save()
 
-    img_path = 'D:/yolov5/web_app/runs/detect/exp/image0.jpg'
+
+    img_path = path_clone_git + "runs/detect/exp/image0.jpg"
     rawBytes = io.BytesIO()
 
     img = cv2.imread(img_path)
@@ -57,7 +60,7 @@ def after_request(response):
 
 if __name__ == '__main__':
     # model = torch.hub.load("ultralytics/yolov5", "yolov5s", pretrained=True, force_reload=True, autoshape=True)  
-    model = torch.hub.load('ultralytics/yolov5', 'custom', path='D:/yolov5/web_app/best.pt')
+    model = torch.hub.load('ultralytics/yolov5', 'custom', path=path_clone_git + 'best.pt')
     model.eval()
     app.run(debug = True)
     app.run(host="0.0.0.0", port=args.port) 

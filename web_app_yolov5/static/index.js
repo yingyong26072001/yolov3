@@ -30,8 +30,6 @@ window.onload = () => {
 	});
 };
 
-
-
 function readUrl(input){
 	$('#imagebox1').height(0)
 	$('#imagebox1').width(0)
@@ -48,6 +46,5 @@ function readUrl(input){
 		}
 		reader.readAsDataURL(input.files[0]);
 	}
-
-	
 }
+
