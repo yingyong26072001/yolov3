@@ -1,0 +1,77 @@
+html {
+  text-align: center;
+  background-color: #282c34;
+  color: white;
+}
+
+.App-header {
+  background-color: #282c34;
+  /* min-height: 100vh; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  font-size: calc(10px + 2vmin);
+  color: white;
+  padding-bottom: 10px;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+
+
+.pre_img{
+  height: 60px;
+  width: 60px;
+  padding-left: 50px;
+}
+
+.con_img{
+  height: 60px;
+  width: 60px;
+  padding-left: 930px;
+}
+
+input[type=file]{
+  background-color: #434743;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: left;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  margin: 10px 40px;
+  margin-top: -20px;
+  border-radius: 10px;
+}
+
+p{
+  margin: 50px;
+  font-size: 72px;
+}
+
+button[name='send']{
+  background-color: black;
+  color: white;
+  padding: 15px 32px;
+  text-align: left;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  margin: 10px 40px;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+button[name='send']:active {
+  transform: translateY(4px);
+}
+
+.aParent div {
+  float: left;
+  clear: none; 
+}

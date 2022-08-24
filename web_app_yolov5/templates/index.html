@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>YOLO-Classification Pets</title>
+	<link rel="stylesheet" type="text/css" href="/static/index.css">
+	<script
+			  src="https://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			  crossorigin="anonymous"></script>
+	<script type="text/javascript" src="/static/index.js"></script>
+</head>
+<body>
+
+
+
+<div class='App'>
+    <header class='App-header'>
+        <p><u>
+          Classification Pets
+        </u></p>
+        <form>
+          <input id="imageinput" type="file" name="image" onchange="readUrl(this)">
+        </form>
+			<button name="send" id = "sendbutton">Process</button>
+	</header>
+</div>
+<div class='aParent'>
+  <div class="pre_img">
+    <span><img id="imagebox" src=""></span>
+  </div>
+  <div class="con_img">
+    <span><img id="imagebox1" src=""></span>
+  </div>
+</div>
+</body>
+</html>
